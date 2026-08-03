@@ -1,0 +1,5 @@
+export type NodeType = 'input'|'keep_columns'|'remove_columns'|'rename_columns'|'filter'|'sort'|'remove_duplicates'|'fill_null'|'case'|'calculated'|'top_n'|'aggregate'|'validation'
+export interface PipelineNode {id:string; type:NodeType; name:string; config:Record<string,any>}
+export interface Pipeline {id:string;name:string;description:string;created_by:string;tags:string[];favorite:boolean;version:number;nodes:PipelineNode[];connections:any[];created_at:string;updated_at:string;input_count:number;step_count:number;last_status:string;last_run?:string}
+export interface Preview {rows:Record<string,any>[];rowCount:number;columnCount:number;columns:{name:string;type:string;nullCount:number;nullPercent:number;distinctCount:number}[];duplicateCount:number;errors:any[]}
+export interface Execution {id:string;pipeline_id:string;status:string;duration_ms:number;output_rows:number;validation_errors:number;started_at:string;log:string[];node_results:(Preview&{nodeId:string;name:string;durationMs:number;status:'success'|'failed';error?:string})[]}
